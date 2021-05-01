@@ -6,7 +6,7 @@ Route.get('/', () => 'Hola estas en AdonisApiSmarHome, Jienjenido :)')
 /* Home */
 
 //Registro Home
-Route.post('/registro','HomeController.registro')
+Route.post('/register','HomeController.registro')
 
 //Login Home y Usuarios
 Route.post('/login','HomeController.login')
@@ -29,7 +29,7 @@ Route.post('/delete/user','HomeController.eliminar_user')
 /* User */
 
 //Registro usuario
-Route.post('/registro/user','UserController.registro_user')
+Route.post('/register/user','UserController.registro_user')
 
 
 
@@ -49,34 +49,39 @@ Route.post('/check','AuthController.check')
 /* Raspberry */
 
 //Registro Raspberry
-Route.post('/registro/raspberry','RaspberryController.registro_raspberry')
+Route.post('/register/raspberry','RaspberryController.registro_raspberry')
 
 //Registro Raspberry existente
-Route.post('/registro/raspberry/existente','RaspberryController.registro_raspberry_existente')
+Route.post('/register/raspberry/existing','RaspberryController.registro_raspberry_existente')
 
 //Eliminar una raspberry de una casa
-Route.post('/eliminar/raspberry/home','RaspberryController.eliminar_raspberry_home')
+Route.post('/delete/raspberry/home','RaspberryController.eliminar_raspberry_home')
 
 //Eliminar una raspberry por completo
-Route.post('/eliminar/raspberry','RaspberryController.eliminar_raspberry')
+Route.post('/delete/raspberry','RaspberryController.eliminar_raspberry')
 
 
 
+/* Dispositivos */
+
+//Registro de dispositivo
+Route.post('/register/device','DeviceController.eliminar_raspberry')
 
 
 
-//Routes
-//Registro Home
-//Login Home y Usuarios
-//Muestra todos los usuarios de una casa
-//Muestra todas las raspberries de una casa
-//Elimina el usuario de una casa
-//Registro usuario
-//Checa el token
-//Registro Raspberry
-//Registro Raspberry existente
-//Eliminar una raspberry de una casa
-//Eliminar una raspberry por completo
+//Rutas de la API atasquense inches puercos 
+//Registro Home -- /register
+//Login Home y Usuarios -- /login
+//Muestra todos los usuarios de una casa -- /show/users
+//Muestra todas las raspberries de una casa -- /show/raspberries
+//Elimina el usuario de una casa -- /delete/user
+//Registro usuario -- /register/user
+//Checa el token -- /check
+//Registro Raspberry -- /register/raspberry
+//Registro Raspberry existente -- /register/raspberry/existing
+//Eliminar una raspberry de una casa -- /delete/raspberry/home
+//Eliminar una raspberry por completo -- /delete/raspberry
+//Registro de dispositivo -- /register/device
 
 
 
