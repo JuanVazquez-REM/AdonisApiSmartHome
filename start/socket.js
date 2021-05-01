@@ -13,12 +13,4 @@
 |
 */
 
-const Ws = use('Ws')
-//Channel Temperatura
-Ws.channel('wstemp','TemperaturaController')
-//Channel Humedad
-Ws.channel('wshum','HumedadController')
-//Channel Focos
-Ws.channel('wsfoco','FocoController')
-//Channel Cochera
-Ws.channel('wscochera','CocheraController')
+//const Ws = use('Ws')
