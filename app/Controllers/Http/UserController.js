@@ -1,16 +1,15 @@
 'use strict'
-const User = use('App/Models/User')
+const Home = use('App/Models/Home')
 const {validate} = use('Validator') 
-const https = require('https');
 
 class UserController {
 
-
-    async registro({request, response}){
-        const data = await User.count()
+    async registro_user({request, response}){
+        const data = await Home.count()
         const id = data + 1
 
         const rules = {
+            home: 'required|integer',
             nombre: 'required|string',
             apellido: 'required|string',
             email: 'required|string',
@@ -22,39 +21,26 @@ class UserController {
         if(validation.fails()){
             return response.status(400).json(validation.messages())
         } else {
-            const {nombre,apellido,email,password} = request.only(['nombre','apellido','email','password'])
+            const {home,nombre,apellido,email,password} = request.only(['home','nombre','apellido','email','password'])
 
-            var crypto = require("crypto");
-            var pin = crypto.randomBytes(2).toString('hex');
             
             try {
-                const user = await User.create({
-                    'user_id': id,
+                const user = await Home.create({
+                    'usuario_id': id,
+                    'home': home,
                     'nombre':nombre,
                     'apellido': apellido,
                     'email': email,
-                    'password': password,
-                    'pin': pin
+                    'password': password
                 })
                 
-                response.status(201).json({
-                    message: user
-                })
+                response.status(201).json(user)
             } catch (error) {
-                response.status(400).json({
-                    message: error
-                })
+                response.status(400).json(error)
             }
         }
     }
 
-    async qr({response, auth}){
-        const user = await User.where('user_id',auth.user.user_id).first()
-        //const qr = await https.get('https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=[1,2,3,4,5,6]')
-        return response.status(200).json({
-            pin: user.pin
-        })
-    }
 }
 
 module.exports = UserController

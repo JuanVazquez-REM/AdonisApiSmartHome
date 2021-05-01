@@ -1,6 +1,7 @@
 'use strict'
 const Home = use('App/Models/Home')
 const {validate} = use('Validator') 
+const Raspberry = use('App/Models/Raspberry')
 
 class HomeController {
 
@@ -67,6 +68,94 @@ class HomeController {
                 return response.status(400).json({
                     message: error
                 })
+            }
+        
+        }
+    }
+
+
+    async mostrar_user({request, response}){
+
+        const rules = {
+            home: 'required|integer'
+        }
+
+        const validation = await validate(request.all(), rules)
+        
+
+        if(validation.fails()){
+            return response.status(400).json(validation.messages())
+        } else {
+            try {
+                const {home} = request.only(['home'])
+                console.log(home)
+                const users = await Home.where('home',home).fetch()
+
+                return response.status(200).json(users)
+                
+            } catch (error) {
+                return response.status(400).json(error)
+            }
+        
+        }
+    }
+
+
+
+    async mostrar_raspberries({request, response}){
+
+        const rules = {
+            home_id: 'required|integer'
+        }
+
+        const validation = await validate(request.all(), rules)
+
+        if(validation.fails()){
+            return response.status(400).json(validation.messages())
+        } else {
+            try {
+                const {home_id} = request.only(['home_id'])
+                
+                const raspberries = await Raspberry.where('home_id',home_id).fetch()
+
+                return response.status(200).json(raspberries)
+                
+            } catch (error) {
+                return response.status(400).json(error)
+            }
+        
+        }
+    }
+
+
+    async eliminar_user({request, response}){
+
+        const rules = {
+            home: 'required|integer',
+            usuario_id: 'required|integer'
+        }
+
+        const validation = await validate(request.all(), rules)
+        
+
+        if(validation.fails()){
+            return response.status(400).json(validation.messages())
+        } else {
+            try {
+                const {home,usuario_id} = request.only(['home','usuario_id'])
+
+                const user = await Home.where('home',home).where('usuario_id',usuario_id).first()
+                
+
+                if(user){
+                    await user.delete()
+                    return response.status(200).json(user)   
+                }else{
+                    return response.status(400).json({message:false})   
+                }     
+                
+            } catch (error) {
+                return response.status(400).json(error)
             }
         
         }
