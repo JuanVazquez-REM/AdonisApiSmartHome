@@ -39,7 +39,7 @@ Route.post('/register/user','UserController.registro_user')
 /* Auth */
 
 //Checa el token
-Route.post('/check','AuthController.check')
+Route.get('/check','AuthController.check')
 
 
 
