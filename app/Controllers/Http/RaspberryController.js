@@ -1,6 +1,7 @@
 'use strict'
 
 const Raspberry = use('App/Models/Raspberry')
+const Device = use('App/Models/Device')
 const {validate} = use('Validator') 
 
 class RaspberryController {
@@ -141,6 +142,37 @@ class RaspberryController {
             } catch (error) {
                 response.status(400).json(error)
             }
+        }
+    }
+
+
+    async pines_raspberry({request,response}){
+
+        const rules = {
+            raspberry_id: 'required|integer',
+        }
+
+        const validation = await validate(request.all(), rules)
+        
+        if(validation.fails()){
+            return response.status(400).json(validation.messages())
+        } else {
+            const {raspberry_id} = request.only(['raspberry_id'])
+            var pines = [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+
+            const devices = await Device.where('raspberry_id',raspberry_id).fetch()
+                
+            for (let i = 0; i < devices.rows.length; i++) {
+                this.removeItemFromArr(pines,devices.rows[i].pin)
+            }
+            return response.status(400).json(pines)
+        }
+    }
+
+    async removeItemFromArr ( arr, item ) {
+        var i = arr.indexOf( item );
+        if ( i !== -1 ) {
+            await arr.splice( i, 1 );
         }
     }
 }

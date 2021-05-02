@@ -6,7 +6,8 @@ const Schema = use('Schema')
 class DeviceSchema extends Schema {
   up () {
     this.create('devices', (collection) => {
-      collection.index('raspberry_id_index_unique', {raspberry_id: 1}, {unique: true})
+      collection.index('raspberry_id_index', {raspberry_id: 1})
+      collection.index('tipo_index', {tipo: 1})
     })
   }
 

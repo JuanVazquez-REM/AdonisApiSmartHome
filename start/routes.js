@@ -54,6 +54,9 @@ Route.post('/register/raspberry','RaspberryController.registro_raspberry')
 //Registro Raspberry existente
 Route.post('/register/raspberry/existing','RaspberryController.registro_raspberry_existente')
 
+//Muestra los pines de una raspberry 
+Route.post('/pines/raspberry','RaspberryController.pines_raspberry')
+
 //Eliminar una raspberry de una casa
 Route.post('/delete/raspberry/home','RaspberryController.eliminar_raspberry_home')
 
@@ -65,7 +68,17 @@ Route.post('/delete/raspberry','RaspberryController.eliminar_raspberry')
 /* Dispositivos */
 
 //Registro de dispositivo
-Route.post('/register/device','DeviceController.eliminar_raspberry')
+Route.post('/register/device','DeviceController.register_device')
+
+//Mostrar todos los dispositivos de una raspberry
+Route.post('/show/devices','DeviceController.mostrar_devices')
+
+//Mostrar los dispositivos de un tipo en espesifico de una raspberry
+Route.post('/show/devices/type','DeviceController.mostrar_devices_type')
+
+//Eliminar un dispositivo
+Route.post('/delete/device','DeviceController.delete_device')
+
 
 
 
@@ -82,6 +95,8 @@ Route.post('/register/device','DeviceController.eliminar_raspberry')
 //Eliminar una raspberry de una casa -- /delete/raspberry/home
 //Eliminar una raspberry por completo -- /delete/raspberry
 //Registro de dispositivo -- /register/device
+//Mostrar todos los dispositivos de una raspberry -- /show/devices
+//Mostrar los dispositivos de un tipo en espesifico de una raspberry -- /show/devices/type
 
 
 

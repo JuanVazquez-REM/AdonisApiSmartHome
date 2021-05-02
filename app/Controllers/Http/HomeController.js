@@ -57,12 +57,18 @@ class HomeController {
             try {
                 const {email, password} = request.only(['email','password'])
                 const token = await auth.attempt(email,password)
-                const home = await Home.where('email',email).first()
 
-                return response.status(200).json({
-                    token: token,
-                    home: home
-                })
+                if(token){
+                    const home = await Home.where('email',email).first()
+
+                    return response.status(200).json({
+                        token: token,
+                        home: home
+                    })
+                }else{
+                    return response.status(400).json({message: "ta mal"})
+                }
+                
                 
             } catch (error) {
                 return response.status(400).json({
