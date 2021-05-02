@@ -118,7 +118,7 @@ class DeviceController {
                 const device = await Device.where('raspberry_id',raspberry_id).where('dispositivo_id',dispositivo_id).first()
 
                 if(device){
-                    device.delete()
+                    await device.delete()
                     response.status(200).json(device)
                 }else{
                     response.status(400).json({message:"Dispositivo  o raspberry no encontrado"})
