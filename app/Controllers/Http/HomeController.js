@@ -111,7 +111,7 @@ class HomeController {
     async mostrar_raspberries({request, response}){
 
         const rules = {
-            home_id: 'required|integer'
+            home_id: 'integer'
         }
 
         const validation = await validate(request.all(), rules)

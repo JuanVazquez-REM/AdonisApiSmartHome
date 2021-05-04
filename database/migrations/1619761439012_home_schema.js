@@ -5,10 +5,10 @@ const Schema = use('Schema')
 
 class HomeSchema extends Schema {
   up () {
-    this.create('homes', (collection) => {
-      collection.index('home_id_index_unique', {user_id: 1}, {unique: true})
+    this.collection('homes', (collection) => {
+      collection.index('home_id_index_unique', {home_id: 1})
       collection.index('email_index_unique', {email: 1}, {unique: true})
-      collection.index('nombre_index_unique', {nombre: 1}, {unique: true})
+      collection.index('nombre_unique', {unique: true})
     })
   }
 

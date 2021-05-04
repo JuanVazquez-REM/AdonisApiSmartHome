@@ -5,9 +5,9 @@ const Schema = use('Schema')
 
 class RaspberrySchema extends Schema {
   up () {
-    this.create('raspberries', (collection) => {
+    this.collection('raspberries', (collection) => {
       collection.index('raspberry_id_index_unique', {raspberry_id: 1}, {unique: true})
-      collection.index('modelo_index', {raspberry_id: 1})
+      collection.index('modelo_index', {modelo: 1})
     })
   }
 

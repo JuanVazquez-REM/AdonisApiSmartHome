@@ -82,7 +82,7 @@ Route.post('/delete/device','DeviceController.delete_device')
 
 
 
-//Rutas de la API atasquense inches puercos 
+//Rutas de la API, atasquense inches puercos 
 //Registro Home -- /register
 //Login Home y Usuarios -- /login
 //Muestra todos los usuarios de una casa -- /show/users
