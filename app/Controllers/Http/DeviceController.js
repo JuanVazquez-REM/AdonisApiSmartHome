@@ -14,7 +14,7 @@ class DeviceController {
         const rules = {
             raspberry_id: 'required|integer',
             nombre: 'required|string',
-            dispositivo_id: 'required|string',
+            tipo: 'required|string',
             pin: 'required|integer',
         }
 
@@ -23,7 +23,7 @@ class DeviceController {
         if(validation.fails()){
             return response.status(400).json(validation.messages())
         } else {
-            const {raspberry_id,nombre,dispositivo_id,pin,modelo} = request.only(['raspberry_id','nombre','dispositivo_id','pin','modelo'])
+            const {raspberry_id,nombre,tipo,pin,modelo} = request.only(['raspberry_id','nombre','tipo','pin','modelo'])
             const devices = await Device.where('raspberry_id',raspberry_id).fetch()
 
             for (let i = 0; i < devices.rows.length; i++) {
@@ -37,7 +37,7 @@ class DeviceController {
                     'dispositivo_id': id,
                     'raspberry_id': raspberry_id,
                     'nombre': nombre,
-                    'dispositivo_id': dispositivo_id,
+                    'tipo': tipo,
                     'pin': pin,
                     'modelo': String(modelo).toUpperCase(),
                 })

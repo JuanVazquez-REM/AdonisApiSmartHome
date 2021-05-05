@@ -8,9 +8,15 @@ class RaspberryController {
 
 
     async registro_raspberry({request, response}){
-        const data = await Raspberry.count()
-        const id = data + 1
-
+        const data = await Raspberry.fetch()
+        var mayor = 0
+        for (let i = 0; i < data.rows.length; i++) {
+            if(data.rows[i].raspberry_id > mayor){
+                mayor = data.rows[i].raspberry_id 
+            }
+        }
+        const id = mayor + 1
+        
         const rules = {
             home_id: 'required|integer',
             nombre: 'required|string',
@@ -59,7 +65,7 @@ class RaspberryController {
 
             
             try {
-                const raspberry = await Raspberry.where('raspberry_id',raspberry_id).first()
+                const raspberry = await Raspberry.where('raspberry_id',raspberry_id).where('in_use',false).first()
 
                 if(raspberry){
                     raspberry.home_id = home_id
