@@ -34,7 +34,7 @@ class DeviceController {
             
             try {
                 const device = await Device.create({
-                    'dispositivo_id': id,
+                    'tipo': id,
                     'raspberry_id': raspberry_id,
                     'nombre': nombre,
                     'tipo': tipo,
@@ -78,7 +78,7 @@ class DeviceController {
 
         const rules = {
             raspberry_id: 'required|integer',
-            dispositivo_id: 'required|string'
+            tipo: 'required|string'
         }
 
         const validation = await validate(request.all(), rules)
@@ -87,9 +87,9 @@ class DeviceController {
             return response.status(400).json(validation.messages())
         } else {
             try {
-                const {raspberry_id,dispositivo_id} = request.only(['raspberry_id','dispositivo_id'])
+                const {raspberry_id,tipo} = request.only(['raspberry_id','tipo'])
 
-                const devices = await Device.where('raspberry_id',raspberry_id).where('dispositivo_id',dispositivo_id).fetch()
+                const devices = await Device.where('raspberry_id',raspberry_id).where('tipo',tipo).fetch()
                 
                 response.status(200).json(devices)
             } catch (error) {
@@ -104,7 +104,7 @@ class DeviceController {
 
         const rules = {
             raspberry_id: 'required|integer',
-            dispositivo_id: 'required|integer'
+            tipo: 'required|integer'
         }
 
         const validation = await validate(request.all(), rules)
@@ -113,9 +113,9 @@ class DeviceController {
             return response.status(400).json(validation.messages())
         } else {
             try {
-                const {raspberry_id,dispositivo_id} = request.only(['raspberry_id','dispositivo_id'])
+                const {raspberry_id,tipo} = request.only(['raspberry_id','tipo'])
 
-                const device = await Device.where('raspberry_id',raspberry_id).where('dispositivo_id',dispositivo_id).first()
+                const device = await Device.where('raspberry_id',raspberry_id).where('tipo',tipo).first()
 
                 if(device){
                     await device.delete()
