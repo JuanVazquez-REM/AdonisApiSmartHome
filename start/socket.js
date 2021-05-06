@@ -13,4 +13,7 @@
 |
 */
 
-//const Ws = use('Ws')
+const Ws = use('Ws')
+
+//Channel Focos
+Ws.channel('wsfoco','FocoController')
