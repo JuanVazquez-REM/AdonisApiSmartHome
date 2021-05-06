@@ -163,15 +163,19 @@ class RaspberryController {
         if(validation.fails()){
             return response.status(400).json(validation.messages())
         } else {
-            const {raspberry_id} = request.only(['raspberry_id'])
-            var pines = [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-
-            const devices = await Device.where('raspberry_id',raspberry_id).fetch()
-                
-            for (let i = 0; i < devices.rows.length; i++) {
-                this.removeItemFromArr(pines,devices.rows[i].pin)
+            try {
+                const {raspberry_id} = request.only(['raspberry_id'])
+                var pines = [2,3,4,5,6,7,8,9,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
+    
+                const devices = await Device.where('raspberry_id',raspberry_id).fetch()
+                    
+                for (let i = 0; i < devices.rows.length; i++) {
+                    this.removeItemFromArr(pines,devices.rows[i].pin)
+                }
+                return response.status(200).json(pines)
+            } catch (error) {
+                return response.status(400).json(error)
             }
-            return response.status(400).json(pines)
         }
     }
 
