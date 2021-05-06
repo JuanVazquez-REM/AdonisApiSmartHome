@@ -83,7 +83,7 @@ class HomeController {
     async mostrar_user({request, response}){
 
         const rules = {
-            home: 'required|integer'
+            home: 'integer'
         }
 
         const validation = await validate(request.all(), rules)
@@ -111,7 +111,7 @@ class HomeController {
     async mostrar_raspberries({request, response}){
 
         const rules = {
-            home_id: 'integer'
+            home_id: ' integer'
         }
 
         const validation = await validate(request.all(), rules)
