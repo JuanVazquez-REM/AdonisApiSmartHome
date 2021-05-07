@@ -139,6 +139,13 @@ class RaspberryController {
                 const raspberry = await Raspberry.where('raspberry_id',raspberry_id).first()
                 
                 if(raspberry){
+                    const dispositivos = await Device.where('raspberry_id',raspberry_id).fetch()
+
+                    for (let o = 0; o < dispositivos.rows.length; o++) {
+                        const dis = await dispositivos.rows[o]
+                        await dis.delete()
+                        
+                    }
                     raspberry.delete()
                     response.status(200).json(raspberry)
                 }else{
